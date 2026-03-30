@@ -1,0 +1,227 @@
+/* BASE & RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    background-color: #050505;
+    color: #f4f4f5;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden; /* Prevent body scroll, handled by main container */
+}
+
+/* INTRO SECTION */
+#intro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.svg-text {
+    width: 80%;
+    max-width: 600px;
+    height: 150px;
+}
+
+.svg-text text {
+    font-family: 'Dancing Script', cursive;
+    font-size: 64px;
+    fill: transparent;
+    stroke: #fff;
+    stroke-width: 1.5px;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+}
+
+/* MAIN SCROLL CONTAINER - CSS SNAPPING */
+.scroll-container {
+    height: 100vh;
+    width: 100vw;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    /* Hide scrollbar for clean cinematic look */
+    scrollbar-width: none; 
+}
+.scroll-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* MEMORY SECTIONS */
+.memory-section {
+    height: 100vh;
+    width: 100vw;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 2rem;
+}
+
+.section-content {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+}
+
+/* IMAGES */
+.images {
+    flex: 1;
+    display: flex;
+    gap: 1.5rem;
+    will-change: transform;
+}
+
+.img-placeholder {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background: linear-gradient(145deg, #111, #1a1a1a);
+    border-radius: 12px;
+    border: 1px solid #2a2a2a;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    /* Set real images here when ready */
+    background-size: cover;
+    background-position: center;
+}
+
+.img-1 { transform: translateY(20px); }
+.img-2 { transform: translateY(-20px); }
+
+/* TEXT CONTENT */
+.text-content {
+    flex: 1;
+    padding-right: 120px; /* Room for calendar */
+}
+
+h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.5px;
+    color: #ffffff;
+}
+
+p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #a1a1aa;
+}
+
+/* STICKY CALENDAR */
+#calendar-wrapper {
+    position: fixed;
+    top: 50%;
+    right: 4rem;
+    transform: translateY(-50%);
+    z-index: 100;
+    opacity: 0; /* Hidden until intro finishes */
+    pointer-events: none;
+}
+
+.calendar-paper {
+    background: #fdfbf7;
+    width: 140px;
+    height: 160px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8), inset 0 0 20px rgba(0,0,0,0.05);
+    position: relative;
+    transform-origin: top center;
+}
+
+.calendar-binding {
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.ring {
+    width: 12px;
+    height: 24px;
+    background: linear-gradient(to bottom, #d4af37, #aa8529);
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.calendar-year {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+/* FINAL SECTION */
+.final-section .section-content {
+    justify-content: center;
+    text-align: center;
+}
+
+.final-text {
+    font-size: 2.5rem;
+    line-height: 1.6;
+    color: #d4d4d8;
+    max-width: 800px;
+}
+
+.highlight {
+    font-family: 'Dancing Script', cursive;
+    font-size: 4rem;
+    color: #fff;
+}
+
+/* RESPONSIVENESS (MOBILE) */
+@media (max-width: 768px) {
+    .section-content {
+        flex-direction: column;
+        gap: 2rem;
+        text-align: center;
+        padding-top: 80px;
+    }
+
+    .text-content {
+        padding-right: 0;
+    }
+
+    h2 { font-size: 2rem; }
+    p { font-size: 1rem; }
+
+    .images {
+        width: 100%;
+        gap: 1rem;
+    }
+
+    .img-1, .img-2 { transform: translateY(0); }
+
+    #calendar-wrapper {
+        top: 2rem;
+        right: 2rem;
+        transform: translateY(0) scale(0.7);
+    }
+    
+    .final-text {
+        font-size: 1.5rem;
+    }
+    .highlight {
+        font-size: 2.5rem;
+    }
+}
